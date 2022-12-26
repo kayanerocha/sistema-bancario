@@ -35,12 +35,16 @@ Entre no diretório do projeto
   cd sistema-bancario
 ```
 
-Instale as dependências
+Instale o virtualenv caso não tenha na sua máquina
 
 ```bash
   pip install virtualenv
+```
+
+Crie um ambiente virtual
+
+```bash
   virtualenv .venv
-  .venv/Scripts/pip install -r requirements.txt
 ```
 
 Rode o arquivo principal
