@@ -4,6 +4,7 @@ from conta_poupanca import ContaPoupanca
 from conta_corrente import ContaCorrente
 from banco import Banco
 from menu import Menu
+from sistema_bancario import SistemaBancario
 
 bb = Banco('Banco do Brasil', '001')
 # bb.inserir_cliente('Kayane', '20', 'cp', 0)
@@ -29,6 +30,25 @@ caixa = Banco('Caixa Econômica Federal', '104')
                     # Depositar
                     # Sacar  
 
+sistema_bancario = SistemaBancario()
 menu_inicial = Menu('SISTEMA BANCÁRIO', ['Cadastrar Banco', 'Listar Bancos', 'Sair'])
-menu_inicial.imprimir_menu()
-opcao = menu_inicial.solicitar_resposta()
+while True:
+    menu_inicial.imprimir_menu()
+    opcao = menu_inicial.solicitar_resposta()
+    if opcao == 0:
+        nome_banco = str(input('Nome do banco: '))
+        while True:
+            try:
+                agencia = int(input('Agência do banco: '))
+            except ValueError:
+                print(f'Informe uma agência válida.')
+            else:
+                banco = Banco(nome_banco, agencia)
+                sistema_bancario.adiciona_banco(banco)
+                print('Banco criado com sucesso!')
+                break
+    elif opcao == 1:
+        menu_bancos = Menu('LISTA DE BANCOS', sistema_bancario.bancos)
+        menu_bancos.imprimir_menu()
+    elif opcao == 2:
+        break
