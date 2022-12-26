@@ -26,13 +26,13 @@ e saques.
 Clone o projeto
 
 ```bash
-  git clone https://link-para-o-projeto
+  git clone https://github.com/kayanerocha/sistema-bancario.git
 ```
 
 Entre no diretório do projeto
 
 ```bash
-  cd my-project
+  cd sistema-bancario
 ```
 
 Instale as dependências
