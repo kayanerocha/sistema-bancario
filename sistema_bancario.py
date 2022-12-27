@@ -4,10 +4,6 @@ class SistemaBancario:
     
     @property
     def bancos(self):
-        # nomes = []
-        # for banco in self.__bancos:
-        #     nomes.append(banco.nome)
-        # return nomes
         return self.__bancos
     
     def adiciona_banco(self, banco):
