@@ -31,11 +31,11 @@ caixa = Banco('Caixa Econômica Federal', '104')
                     # Sacar  
 
 sistema_bancario = SistemaBancario()
-menu_inicial = Menu('SISTEMA BANCÁRIO', ['Cadastrar Banco', 'Listar Bancos', 'Sair'])
+menu_inicial = Menu('SISTEMA BANCÁRIO', ['Sair', 'Cadastrar Banco', 'Listar Bancos'])
 while True:
     menu_inicial.imprimir_menu()
     opcao = menu_inicial.solicitar_resposta()
-    if opcao == 0:
+    if opcao == 1:
         nome_banco = str(input('Nome do banco: '))
         while True:
             try:
@@ -47,8 +47,38 @@ while True:
                 sistema_bancario.adiciona_banco(banco)
                 print('Banco criado com sucesso!')
                 break
-    elif opcao == 1:
-        menu_bancos = Menu('LISTA DE BANCOS', sistema_bancario.bancos)
-        menu_bancos.imprimir_menu()
     elif opcao == 2:
+        lista_menu_bancos = []
+        for banco in sistema_bancario.bancos:
+            lista_menu_bancos.append(banco.nome)     
+        lista_menu_bancos.append('Voltar')
+        lista_menu_bancos.append('Sair')
+        menu_bancos = Menu('LISTA DE BANCOS', lista_menu_bancos)
+
+        while True:
+            menu_bancos.imprimir_menu()
+            opcao_banco = menu_bancos.solicitar_resposta()
+
+            if opcao_banco >= len(lista_menu_bancos):
+                print('Informe uma opção válida.')
+            elif opcao_banco == len(lista_menu_bancos) - 2:
+                break
+            elif opcao_banco == len(lista_menu_bancos) - 1:
+                exit()
+            else:
+                banco_escolhido = sistema_bancario.bancos[opcao_banco]
+                menu_banco = Menu(banco_escolhido.nome, ['Cadastrar cliente', 'Listar Clientes', 'Sair', 'Voltar'])
+                
+                while True:
+                    menu_banco.imprimir_menu()
+                    opcao_interna = menu_banco.solicitar_resposta()
+                    
+                    if opcao_banco >= len(lista_menu_bancos):
+                        print('Informe uma opção válida.')
+                    elif opcao_banco == len(lista_menu_bancos) - 2:
+                        break
+                    elif opcao_banco == len(lista_menu_bancos) - 1:
+                        exit()
+            
+    elif opcao == 0:
         break
