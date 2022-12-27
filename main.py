@@ -67,18 +67,32 @@ while True:
                 exit()
             else:
                 banco_escolhido = sistema_bancario.bancos[opcao_banco]
-                menu_banco = Menu(banco_escolhido.nome, ['Cadastrar cliente', 'Listar Clientes', 'Sair', 'Voltar'])
+                opcoes_menu_banco = ['Cadastrar Cliente', 'Listar Clientes', 'Voltar', 'Sair']
+                menu_banco = Menu(banco_escolhido.nome, opcoes_menu_banco)
                 
                 while True:
                     menu_banco.imprimir_menu()
                     opcao_interna = menu_banco.solicitar_resposta()
                     
-                    if opcao_banco >= len(lista_menu_bancos):
+                    if opcao_interna >= len(opcoes_menu_banco):
                         print('Informe uma opção válida.')
-                    elif opcao_banco == len(lista_menu_bancos) - 2:
+                    elif opcao_interna == len(opcoes_menu_banco) - 2:
                         break
-                    elif opcao_banco == len(lista_menu_bancos) - 1:
+                    elif opcao_interna == len(opcoes_menu_banco) - 1:
                         exit()
+                    elif opcao_interna == 0:
+                        nome_cliente = str(input('Nome do cliente: '))
+                        while True:
+                            try:
+                                cpf = int(input('CPF do cliente: '))
+                            except ValueError:
+                                print('Informe apenas números.')
+                            else:
+                                while True:
+                                    tipo_conta = str(input('Tipo de conta [CP/CC]: '))
+                                    banco_escolhido.inserir_cliente(nome_cliente, cpf, tipo_conta)
+                                    break
+                                break
             
     elif opcao == 0:
         break

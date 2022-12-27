@@ -25,12 +25,16 @@ class Banco:
     def contas(self):
         return self.__contas
     
-    def inserir_cliente(self, nome, idade, tipo_conta, saldo):
-        cliente = Cliente(nome, idade)
-        cliente.conta = self.inserir_conta(tipo_conta, saldo)
-        self.__clientes.append(cliente)
-        print('Cliente cadastrado com sucesso!')
-        cliente.mostrar_cliente()
+    def inserir_cliente(self, nome, cpf, tipo_conta, saldo):
+        if Banco.valida_conta(tipo_conta):
+            cliente = Cliente(nome, cpf)
+            cliente.conta = self.inserir_conta(tipo_conta, saldo)
+            self.__clientes.append(cliente)
+            print('Cliente cadastrado com sucesso!')
+            cliente.mostrar_cliente()
+
+            return True
+        return False
     
     def listar_clientes(self):
         for cliente in self.__clientes:
@@ -70,3 +74,9 @@ class Banco:
         cliente = self.autenticar_cliente(cpf, agencia, numero_conta)
         if isinstance(cliente, Cliente):
             cliente.conta.depositar(valor)
+    
+    @staticmethod
+    def valida_conta(tipo_conta):
+        if tipo_conta.upper() not in ['CP', 'CC']:
+            return False
+        return True
