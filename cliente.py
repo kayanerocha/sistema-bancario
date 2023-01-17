@@ -21,6 +21,7 @@ class Cliente(Pessoa):
             print('Informe um nome válido: ')
         else:
             print('Deu certo')
+            self.cpf = str(input('Informe o CPF do cliente com apenas números: '))
     
     def mostrar_cliente(self):
         print('------- DADOS DO CLIENTE ------')
@@ -30,35 +31,48 @@ class Cliente(Pessoa):
             print(f'Limite: {self.conta.limite}')
         print('-' * 30)
     
-    def valida_cpf(self):
+    @staticmethod
+    def valida_cpf(cpf):
         # Insere o CPF em uma lista
-        cpf = []
-        for n in str(self.cpf):
-            cpf.append(n)
+        lista_cpf = []
+        for n in str(cpf):
+            lista_cpf.append(n)
+        if len(lista_cpf) < 11 or len(lista_cpf) > 11:
+            print('CPF inválido.')
+            return False
         
         # Primeira multiplicação com os primeiros 9 digitos
-        i = 10
+        multiplicacao = Cliente.multiplica_digitos(10, lista_cpf)
+
+        # Validação do primeiro dígito depois do -
+        primeiro_resto = (multiplicacao * 10) % 11
+        primeiro_resto = 0 if primeiro_resto == 10 else primeiro_resto
+        if primeiro_resto == int(lista_cpf[9]):            
+            # Segunda multiplicação com os primeiros 10 digitos
+            multiplicacao = Cliente.multiplica_digitos(11, lista_cpf)
+            print(f'Total: {multiplicacao}')
+            segundo_resto = (multiplicacao * 10) % 11
+            if segundo_resto == int(lista_cpf[10]):                
+                return True
+            print('CPF inválido.')
+            return False
+        else:
+            print('CPF inválido.')
+            return False
+        
+        # for i in range(10, 1, -1):
+        #     print(i)
+    
+    @staticmethod
+    def multiplica_digitos(limite, cpf):
+        i = limite
         j = 0
         multiplicacao = 0
         while i >= 2:
             n = int(cpf[j])
             multiplicacao += i * n
-            print(f'{i} * {n} = {i * n}')
             i -= 1
             j += 1
-        print(f'Total: {multiplicacao}')
-
-        # Validação do primeiro dígito depois do -
-        primeiro_resto = (multiplicacao * 10) % 11
-        primeiro_resto = 0 if primeiro_resto == 10 else primeiro_resto
-        if primeiro_resto == int(cpf[9]):
-            print('Passou na primeira validação.')
-
-        else:
-            print('Não passou na validação')
         
-        # for i in range(10, 1, -1):
-        #     print(i)
-    
-    
+        return multiplicacao
 

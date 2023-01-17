@@ -25,14 +25,13 @@ class Banco:
     def contas(self):
         return self.__contas
     
-    def inserir_cliente(self, nome, cpf, tipo_conta, saldo):
+    def inserir_cliente(self, nome, cpf, tipo_conta, saldo=0):
         if Banco.valida_conta(tipo_conta):
             cliente = Cliente(nome, cpf)
             cliente.conta = self.inserir_conta(tipo_conta, saldo)
             self.__clientes.append(cliente)
             print('Cliente cadastrado com sucesso!')
             cliente.mostrar_cliente()
-
             return True
         return False
     

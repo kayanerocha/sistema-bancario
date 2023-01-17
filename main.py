@@ -85,12 +85,15 @@ while True:
                         while True:
                             try:
                                 cpf = int(input('CPF do cliente: '))
+                                if not Cliente.valida_cpf(cpf):
+                                    continue
                             except ValueError:
                                 print('Informe apenas números.')
                             else:
                                 while True:
                                     tipo_conta = str(input('Tipo de conta [CP/CC]: '))
-                                    banco_escolhido.inserir_cliente(nome_cliente, cpf, tipo_conta)
+                                    if not banco_escolhido.inserir_cliente(nome_cliente, cpf, tipo_conta):                                       
+                                        continue
                                     break
                                 break
             
