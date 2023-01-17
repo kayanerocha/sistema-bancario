@@ -67,7 +67,7 @@ while True:
                 exit()
             else:
                 banco_escolhido = sistema_bancario.bancos[opcao_banco]
-                opcoes_menu_banco = ['Cadastrar Cliente', 'Listar Clientes', 'Voltar', 'Sair']
+                opcoes_menu_banco = ['Cadastrar Cliente', 'Listar Clientes', 'Detalhes', 'Voltar', 'Sair']
                 menu_banco = Menu(banco_escolhido.nome, opcoes_menu_banco)
                 
                 while True:
@@ -96,8 +96,10 @@ while True:
                                         continue
                                     break
                                 break
-                    else:
+                    elif opcao_interna == 1:
                         banco_escolhido.listar_clientes()
+                    else:
+                        banco_escolhido.imprimir_detalhes()
             
     elif opcao == 0:
         break

@@ -25,6 +25,9 @@ class Banco:
     def contas(self):
         return self.__contas
     
+    def imprimir_detalhes(self):
+        print(f'''Nome: {self.nome} \nAgência: {self.agencia}''')
+    
     def inserir_cliente(self, nome, cpf, tipo_conta, saldo=0):
         if Banco.valida_conta(tipo_conta):
             cliente = Cliente(nome, cpf)
