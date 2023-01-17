@@ -96,6 +96,8 @@ while True:
                                         continue
                                     break
                                 break
+                    else:
+                        banco_escolhido.listar_clientes()
             
     elif opcao == 0:
         break

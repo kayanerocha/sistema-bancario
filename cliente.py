@@ -50,7 +50,6 @@ class Cliente(Pessoa):
         if primeiro_resto == int(lista_cpf[9]):            
             # Segunda multiplicação com os primeiros 10 digitos
             multiplicacao = Cliente.multiplica_digitos(11, lista_cpf)
-            print(f'Total: {multiplicacao}')
             segundo_resto = (multiplicacao * 10) % 11
             if segundo_resto == int(lista_cpf[10]):                
                 return True
