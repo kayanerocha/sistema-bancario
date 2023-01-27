@@ -58,9 +58,6 @@ class Cliente(Pessoa):
         else:
             print('CPF inválido.')
             return False
-        
-        # for i in range(10, 1, -1):
-        #     print(i)
     
     @staticmethod
     def multiplica_digitos(limite, cpf):

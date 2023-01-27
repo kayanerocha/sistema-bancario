@@ -40,7 +40,7 @@ class Banco:
     
     def listar_clientes(self):
         for cliente in self.__clientes:
-            cliente.mostrar_cliente()
+            print(cliente.nome)
     
     def inserir_conta(self, tipo_conta, saldo):
         if tipo_conta.upper() in 'CP':
